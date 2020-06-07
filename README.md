@@ -11,13 +11,14 @@ Live build: create the ISO**
 
 Clone or download this GitHub repository and change the current directory to it.
 
-A patched live-build program is needed for a correct live-building. The .deb package of live-build patched by our Team must be installed as the first step:
+A patched live-build program is needed for a correct live-building. 
+The .deb package of live-build patched by our Team must be installed as the first step:
 
     dpkg -i live-build2019031131_all.deb
     apt install -fy
 
 Live building is now trivial:
 
-    cd /live-build
+    cd live-build
     lb build
     
