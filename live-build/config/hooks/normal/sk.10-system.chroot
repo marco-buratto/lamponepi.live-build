@@ -1,0 +1,64 @@
+#!/bin/bash
+
+####################################################################################################################################
+# System-related installations and key configurations.
+####################################################################################################################################
+
+# Kernel installation from backports.
+apt install -y -t buster-backports linux-image-5.5.0-0.bpo.2-arm64 linux-headers-5.5.0-0.bpo.2-arm64
+
+# Removing the old kernel.
+apt -y --purge remove linux-image-arm64
+
+# Set a password for root.
+printf "password\npassword" | passwd
+
+# Replace agetty with fgetty, since it seems not to work.
+systemctl daemon-reload
+systemctl disable getty@.service
+systemctl enable fgetty
+
+# TimeZone UTC.
+ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+
+# Lampone Pi version file.
+cat > /etc/os-release <<EOF
+NAME="LamponePi"
+PRETTY_NAME="LamponePi"
+VERSION="1.0"
+BUILD="$(date +'%Y%m%d:%H%m')"
+BUILD_ID="$(date +'%Y%m%d:%H%m')"
+ID=lampone-pi
+EOF
+
+
+####################################################################################################################################
+# User interface configurations.
+####################################################################################################################################
+
+# Set splash (Plymouth) theme.
+plymouth-set-default-theme spinner
+
+# Rebuild the initrd.
+update-initramfs -u
+
+
+####################################################################################################################################
+# Cleanups.
+####################################################################################################################################
+
+# Divert the following files, for we don't want them to be ever updated.
+programFiles=("/usr/lib/os-release")
+for programFile in ${programFiles[@]};
+do
+    programFileName=$(echo -n "$programFile" | sed -r -e 's#(.*)/(.*)#\2#')
+    dpkg-divert --divert /tmp/$programFileName --rename $programFile
+    cp -a /tmp/$programFileName $programFile
+done
+
+# As of now, openssh seems to be broken, transitionally, reinstall here.
+apt install --reinstall -y openssh-server
+
+# Final cleanups.
+apt clean
+apt -y --purge autoremove

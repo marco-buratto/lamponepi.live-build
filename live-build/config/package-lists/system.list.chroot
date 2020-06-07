@@ -1,0 +1,14 @@
+dnsutils
+dosfstools
+fgetty
+locales-all
+net-tools
+openssh-server
+plymouth-themes
+sudo
+usbutils
+wireless-tools
+wpasupplicant
+
+firmware-brcm80211
+raspi3-firmware

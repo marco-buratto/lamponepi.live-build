@@ -1,0 +1,7 @@
+Package: *
+Pin: release n=buster
+Pin-Priority: 900
+
+Package: raspi-firmware raspi3-firmware
+Pin: release n=bullseye
+Pin-Priority: 1000
