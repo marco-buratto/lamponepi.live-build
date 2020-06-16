@@ -20,5 +20,6 @@ The .deb package of live-build patched by our Team must be installed as the firs
 Live building is now trivial:
 
     cd live-build
-    lb build
     
+    lb config
+    lb build
