@@ -4,6 +4,10 @@
 # System-related installations and key configurations.
 ####################################################################################################################################
 
+# Live tools patched for the kernel update.
+dpkg -i /live-tools_2.0_all.deb
+apt-mark hold live-tools
+
 # Kernel installation from backports.
 apt install -y -t buster-backports linux-image-5.5.0-0.bpo.2-arm64 linux-headers-5.5.0-0.bpo.2-arm64
 
