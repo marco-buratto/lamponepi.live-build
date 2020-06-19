@@ -4,8 +4,12 @@
 # System-related installations and key configurations.
 ####################################################################################################################################
 
-# Mark hold the Live tools package, patched for the kernel update.
-apt-mark hold live-tools
+# Mark hold the Live tools patched for the kernel update.
+apt-mark hold live-tools 
+
+# Mark hold the raspi3-firmware; installed version is an empty package.
+# raspi3-firmware breaks the liveng kernel update.
+apt-mark hold raspi3-firmware
 
 # Kernel installation from backports.
 apt install -y -t buster-backports linux-image-5.5.0-0.bpo.2-arm64 linux-headers-5.5.0-0.bpo.2-arm64
