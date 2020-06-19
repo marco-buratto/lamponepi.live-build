@@ -4,11 +4,13 @@
 # System-related installations and key configurations.
 ####################################################################################################################################
 
-# Mark hold the Live tools patched for the kernel update.
-apt-mark hold live-tools 
+# Install and put in hold the Live tools patched for the kernel update.
+dpkg -i /live-tools_2.0_all.deb
+apt-mark hold live-tools
 
-# Mark hold the raspi3-firmware; installed version is an empty package.
+# Install and put in hold an empty raspi3-firmware package.
 # raspi3-firmware breaks the liveng kernel update.
+dpkg -i /raspi3-firmware_100.0_arm64.deb
 apt-mark hold raspi3-firmware
 
 # Kernel installation from backports.
