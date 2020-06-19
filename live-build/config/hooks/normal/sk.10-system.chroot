@@ -69,5 +69,7 @@ done
 apt install --reinstall -y openssh-server
 
 # Final cleanups.
+rm /*.deb
+
 apt clean
 apt -y --purge autoremove
