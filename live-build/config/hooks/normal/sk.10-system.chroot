@@ -4,8 +4,7 @@
 # System-related installations and key configurations.
 ####################################################################################################################################
 
-# Live tools patched for the kernel update.
-dpkg -i /live-tools_2.0_all.deb
+# Mark hold the Live tools package, patched for the kernel update.
 apt-mark hold live-tools
 
 # Kernel installation from backports.
