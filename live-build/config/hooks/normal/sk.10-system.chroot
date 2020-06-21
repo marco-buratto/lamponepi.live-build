@@ -4,13 +4,12 @@
 # System-related installations and key configurations.
 ####################################################################################################################################
 
-# Install and put in hold the Live tools patched for the kernel update.
-dpkg -i /live-tools_2.0_all.deb
+# Put in hold the Live tools patched for the kernel update.
 apt-mark hold live-tools
 
 # Kernel installation from backports.
-apt install -y -t buster-backports linux-image-5.5.0-0.bpo.2-arm64 linux-headers-5.5.0-0.bpo.2-arm64
-#apt install -y -t buster-backports linux-image-5.6.0-0.bpo.2-arm64-unsigned linux-headers-5.6.0-0.bpo.2-arm64
+#apt install -y -t buster-backports linux-image-5.5.0-0.bpo.2-arm64 linux-headers-5.5.0-0.bpo.2-arm64
+apt install -y -t buster-backports linux-image-5.6.0-0.bpo.2-arm64-unsigned linux-headers-5.6.0-0.bpo.2-arm64
 
 # Removing the old kernel.
 apt -y --purge remove linux-image-arm64
@@ -63,9 +62,6 @@ done
 
 # As of now, openssh seems to be broken, transitionally, reinstall here.
 apt install --reinstall -y openssh-server
-
-# Final cleanups.
-rm /*.deb
 
 apt clean
 apt -y --purge autoremove
